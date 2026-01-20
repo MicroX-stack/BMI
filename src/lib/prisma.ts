@@ -1,15 +1,14 @@
 import { PrismaClient } from "@/generated/client/client"
-import { createClient } from "@libsql/client"
-import { PrismaLibSql } from "@prisma/adapter-libsql"
+import { withAccelerate } from "@prisma/extension-accelerate"
 
 const prismaClientSingleton = () => {
-  console.log("Initializing Prisma Client with LibSQL adapter...")
+  console.log("Initializing Prisma Client with Accelerate extension...")
   try {
-    const adapter = new PrismaLibSql({
-      url: process.env.DATABASE_URL!,
+    const client = new PrismaClient({
+      accelerateUrl: process.env.DATABASE_URL!,
     })
-    
-    const client = new PrismaClient({ adapter })
+      .$extends(withAccelerate())
+
     console.log("Prisma Client initialized successfully.")
     return client
   } catch (error) {

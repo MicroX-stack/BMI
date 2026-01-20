@@ -500,6 +500,7 @@ export type BMIRecordCreateOrConnectWithoutUserInput = {
 
 export type BMIRecordCreateManyUserInputEnvelope = {
   data: Prisma.BMIRecordCreateManyUserInput | Prisma.BMIRecordCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type BMIRecordUpsertWithWhereUniqueWithoutUserInput = {
@@ -1295,6 +1296,7 @@ export type BMIRecordCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * The data used to create many BMIRecords.
    */
   data: Prisma.BMIRecordCreateManyInput | Prisma.BMIRecordCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1313,6 +1315,7 @@ export type BMIRecordCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many BMIRecords.
    */
   data: Prisma.BMIRecordCreateManyInput | Prisma.BMIRecordCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */
