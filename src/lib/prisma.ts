@@ -3,12 +3,21 @@ import { withAccelerate } from "@prisma/extension-accelerate"
 
 const prismaClientSingleton = () => {
   console.log("Initializing Prisma Client with Accelerate extension...")
+  
+  const url = process.env.DATABASE_URL
+  if (!url) {
+    console.error("Error: DATABASE_URL is not defined in environment variables.")
+    // In build time, we might want to skip this or throw. 
+    // Throwing is better to catch config errors.
+    throw new Error("DATABASE_URL is missing")
+  }
+
   try {
     const client = new PrismaClient({
-      accelerateUrl: process.env.DATABASE_URL!,
+      accelerateUrl: url,
     })
       .$extends(withAccelerate())
-
+    
     console.log("Prisma Client initialized successfully.")
     return client
   } catch (error) {
